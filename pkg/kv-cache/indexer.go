@@ -20,12 +20,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/llm-d/llm-d-kv-cache-manager/pkg/prefixstore"
+	"github.com/Luca-Calabria/llm-d-kv-cache-manager/pkg/prefixstore"
 	"k8s.io/apimachinery/pkg/util/sets"
 
 	"k8s.io/klog/v2"
 
-	"github.com/llm-d/llm-d-kv-cache-manager/pkg/tokenization"
+	"github.com/Luca-Calabria/llm-d-kv-cache-manager/pkg/tokenization"
 )
 
 // Config holds the configuration for the Indexer module.
@@ -107,7 +107,7 @@ func (k *Indexer) Run(ctx context.Context) {
 // The function returns a map of pod identifiers to scores.
 func (k *Indexer) GetPodScores(ctx context.Context, prompt, modelName string,
 	podIdentifiers []string,
-) (map[string]int, error) {
+) (map[string]int, error, string) {
 	traceLogger := klog.FromContext(ctx).V(5)
 	// 0. add to tokenizers pool
 	k.tokenizersPool.AddTask(prompt, modelName)
@@ -115,8 +115,9 @@ func (k *Indexer) GetPodScores(ctx context.Context, prompt, modelName string,
 	// 1. get available tokens of longest prefix
 	tokens := k.tokensIndexer.FindLongestContainedTokens(prompt, modelName)
 	if len(tokens) == 0 {
+		return_string := "tokens len=0"
 		//nolint:nilnil // no need to return an error
-		return nil, nil
+		return nil, nil, return_string
 	}
 
 	// 2. get block keys
@@ -126,16 +127,16 @@ func (k *Indexer) GetPodScores(ctx context.Context, prompt, modelName string,
 	// 3. query kvblock indexer for pods
 	strBlockKeys, keyToPods, err := k.kvBlockIndexer.GetPodsForKeys(ctx, blockKeys, sets.New(podIdentifiers...))
 	if err != nil {
-		return nil, fmt.Errorf("failed to query kvblock indexer: %w", err)
+		return nil, fmt.Errorf("failed to query kvblock indexer: %w", err), ""
 	}
 	traceLogger.Info("found block keys", "block-keys", blockKeys, "pods", keyToPods)
 
 	// 4. score pods
 	podScores, err := k.kvBlockScorer.Score(strBlockKeys, keyToPods)
 	if err != nil {
-		return nil, fmt.Errorf("failed to query kvblock scorer: %w", err)
+		return nil, fmt.Errorf("failed to query kvblock scorer: %w", err), ""
 	}
 	traceLogger.Info("found pod scores", "pod-scores", podScores)
-
-	return podScores, nil
+	return_string := fmt.Sprintf("found tokens: %v, block-keys: %v", tokens, blockKeys)
+	return podScores, nil, return_string
 }

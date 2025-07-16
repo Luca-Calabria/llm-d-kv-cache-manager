@@ -84,19 +84,20 @@ func NewCachedHFTokenizer(config *HFTokenizerConfig) (Tokenizer, error) {
 
 // Encode converts a string into token IDs.
 func (t *CachedHFTokenizer) Encode(input, modelName string) ([]uint32, []tokenizers.Offset, error) {
-	fmt.Print("Tokenizer.go:tokenization:Encode - Before t.cache.Get")
+	fmt.Println("Tokenizer.go:tokenization:Encode - Before t.cache.Get")
 	tk, ok := t.cache.Get(modelName)
-	fmt.Print("Tokenizer.go:tokenization:Encode - After t.cache.Get")
+	fmt.Println("Tokenizer.go:tokenization:Encode - After t.cache.Get")
 	if !ok {
-		fmt.Print("Tokenizer.go:tokenization:Encode - Before tokenizers.FromPretrained")
+		fmt.Println("Tokenizer.go:tokenization:Encode - Before tokenizers.FromPretrained")
 		tokenizer, err := tokenizers.FromPretrained(modelName, t.cfg)
 		if err != nil {
+			fmt.Errorf("failed to run FromPretrained: %w", err)
 			return nil, nil, err
 		}
-		fmt.Print("Tokenizer.go:tokenization:Encode - After tokenizers.FromPretrained")
-		fmt.Print("Tokenizer.go:tokenization:Encode - Before t.cache.Add")
+		fmt.Println("Tokenizer.go:tokenization:Encode - After tokenizers.FromPretrained")
+		fmt.Println("Tokenizer.go:tokenization:Encode - Before t.cache.Add")
 		t.cache.Add(modelName, tokenizer)
-		fmt.Print("Tokenizer.go:tokenization:Encode - After t.cache.Add")
+		fmt.Println("Tokenizer.go:tokenization:Encode - After t.cache.Add")
 		tk = tokenizer
 	}
 
@@ -104,9 +105,9 @@ func (t *CachedHFTokenizer) Encode(input, modelName string) ([]uint32, []tokeniz
 		tokenizers.WithReturnTypeIDs(),
 		tokenizers.WithReturnOffsets(),
 	}
-	fmt.Print("Tokenizer.go:tokenization:Encode - Before tk.EncodeWithOptions")
+	fmt.Println("Tokenizer.go:tokenization:Encode - Before tk.EncodeWithOptions")
 	resp := tk.EncodeWithOptions(input, true, encodeOptions...)
-	fmt.Print("Tokenizer.go:tokenization:Encode - After tk.EncodeWithOptions")
+	fmt.Println("Tokenizer.go:tokenization:Encode - After tk.EncodeWithOptions")
 	return resp.IDs, resp.Offsets, nil
 }
 

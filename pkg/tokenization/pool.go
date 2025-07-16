@@ -87,9 +87,9 @@ func (pool *Pool) AddTask(prompt, modelName string) {
 		Prompt:    prompt,
 		ModelName: modelName,
 	}
-	fmt.Print("Before add task to pool.queue")
+	fmt.Println("Before add task to pool.queue")
 	pool.queue.Add(task)
-	fmt.Print("After add task to pool.queue")
+	fmt.Println("After add task to pool.queue")
 }
 
 // Run launches worker goroutines that process tasks until the context is

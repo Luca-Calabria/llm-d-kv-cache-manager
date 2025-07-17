@@ -105,7 +105,7 @@ func (t *CachedHFTokenizer) Encode(input, modelName string) ([]uint32, []tokeniz
 	}
 
 	resp := tk.EncodeWithOptions(input, true, encodeOptions...)
-	fmt.Println("Tokenizer.go:tokenization:Encode - After tk.EncodeWithOptions")
+	fmt.Println("Tokenizer.go:tokenization:Encode - After tk.EncodeWithOptions: resp.IDs ", resp.IDs)
 	return resp.IDs, resp.Offsets, nil
 }
 

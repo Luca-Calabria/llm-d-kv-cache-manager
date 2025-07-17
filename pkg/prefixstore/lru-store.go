@@ -170,17 +170,21 @@ func (c *LRUTokenStore) FindLongestContainedTokens(prompt, modelName string) []u
 
 	// Chunk the text into blocks and populate the cache
 	for i := 0; i < len(promptBytes); i += c.blockSize {
+		fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle iter: ", i)
 		end := i + c.blockSize
 		if end > len(promptBytes) {
+			fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle break end>len(promptBytes)")
 			break // no partial blocks
 		}
 
 		// Compute the hash for the current block
 		digest.Reset()
 		if err := binary.Write(digest, binary.LittleEndian, previousHash); err != nil {
+			fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle break err from binary.Write")
 			break
 		}
 		if _, err := digest.Write(promptBytes[i:end]); err != nil {
+			fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle break err from digest.Write")
 			break
 		}
 
@@ -189,9 +193,10 @@ func (c *LRUTokenStore) FindLongestContainedTokens(prompt, modelName string) []u
 
 		block, ok := cache.Get(blockHash)
 		if !ok {
+			fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle break from cache.Get")
 			break // early-stop
 		}
-
+		fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle block.tokens: ", block.Tokens)
 		containedTokens = append(containedTokens, block.Tokens...)
 	}
 

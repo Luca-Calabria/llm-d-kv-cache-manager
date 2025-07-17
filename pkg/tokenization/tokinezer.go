@@ -85,7 +85,6 @@ func NewCachedHFTokenizer(config *HFTokenizerConfig) (Tokenizer, error) {
 // Encode converts a string into token IDs.
 func (t *CachedHFTokenizer) Encode(input, modelName string) ([]uint32, []tokenizers.Offset, error) {
 	tk, ok := t.cache.Get(modelName)
-	fmt.Println("Tokenizer.go:tokenization:Encode - After t.cache.Get")
 	if !ok {
 		fmt.Println("Tokenizer.go:tokenization:Encode - Before tokenizers.FromPretrained")
 		tokenizer, err := tokenizers.FromPretrained(modelName, t.cfg)
@@ -95,7 +94,6 @@ func (t *CachedHFTokenizer) Encode(input, modelName string) ([]uint32, []tokeniz
 		}
 
 		t.cache.Add(modelName, tokenizer)
-		fmt.Println("Tokenizer.go:tokenization:Encode - After t.cache.Add")
 		tk = tokenizer
 	}
 

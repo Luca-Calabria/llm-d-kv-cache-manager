@@ -150,7 +150,8 @@ func (db *ChunkedTokenDatabase) prefixHashes(tokenChunks [][]uint32) []string {
 func (db *ChunkedTokenDatabase) TokensToKVBlockKeys(tokens []uint32, modelName string) []KVBlockKey {
 	tokenChunks := db.chunkTokens(tokens)
 	prefixHashes := db.prefixHashes(tokenChunks)
-
+	fmt.Println("kv-cache:token-processor:TokensToKVBlockKeys - tokenChunks: ", tokenChunks)
+	fmt.Println("kv-cache:token-processor:TokensToKVBlockKeys - prefixHashes: ", prefixHashes)
 	return utils.SliceMap(prefixHashes, func(hashVal string) KVBlockKey {
 		return KVBlockKey{
 			ModelName: modelName,

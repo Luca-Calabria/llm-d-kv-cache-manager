@@ -154,6 +154,7 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 // FindLongestContainedTokens finds the sequence of contained tokens for
 // the longest matching prefix.
 func (c *LRUTokenStore) FindLongestContainedTokens(prompt, modelName string) []uint32 {
+	fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - run mutex lock")
 	c.mu.RLock()
 	cache, ok := c.store[modelName]
 	c.mu.RUnlock()

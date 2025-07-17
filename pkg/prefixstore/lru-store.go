@@ -108,7 +108,7 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 		c.store[modelName] = cache
 		fmt.Println("Prefixstore:lru-store:AddTokenization - Cache entry created")
 	}
-	fmt.Println("Prefixstore:lru-store:AddTokenization - c.store return true. Key is in cache.")
+	fmt.Println("Prefixstore:lru-store:AddTokenization - c.store. Key is in cache.")
 	promptBytes := []byte(prompt)
 	tokenIdxIterator := 0
 	previousHash := uint64(0)
@@ -124,9 +124,11 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 		// Compute the hash for the current block
 		digest.Reset()
 		if err := binary.Write(digest, binary.LittleEndian, previousHash); err != nil {
+			fmt.Println("Prefixstore:lru-store:AddTokenization - For cycle binery.Write return err: failed to add token: ", err)
 			return fmt.Errorf("failed to add token: %w", err)
 		}
 		if _, err := digest.Write(promptBytes[start:end]); err != nil {
+			fmt.Println("Prefixstore:lru-store:AddTokenization - For cycle digest.Write return err: failed to add token: ", err)
 			return fmt.Errorf("failed to add token: %w", err)
 		}
 

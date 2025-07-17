@@ -28,7 +28,7 @@ import (
 
 // tokenizersCacheSize is the size of the LRU cache for tokenizers.
 // 1 tokenizer per base-model (NOT LoRAs).
-const tokenizersCacheSize = 20
+const tokenizersCacheSize = 200
 
 // Tokenizer interface defines the methods for tokenization.
 type Tokenizer interface {

@@ -98,6 +98,7 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 	// Get or create the LRU cache for the model
 	cache, ok := c.store[modelName]
 	if !ok {
+		fmt.Println("Prefixstore:lru-store:AddTokenization - c.store return false. Key not in cache. Creating it")
 		var err error
 		cache, err = lru.New[uint64, Block](c.cacheSize)
 		if err != nil {
@@ -105,8 +106,9 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 		}
 
 		c.store[modelName] = cache
+		fmt.Println("Prefixstore:lru-store:AddTokenization - Cache entry created")
 	}
-
+	fmt.Println("Prefixstore:lru-store:AddTokenization - c.store return true. Key is in cache.")
 	promptBytes := []byte(prompt)
 	tokenIdxIterator := 0
 	previousHash := uint64(0)
@@ -146,6 +148,7 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 		}
 
 		cache.Add(blockHash, block)
+		fmt.Println("Prefixstore:lru-store:AddTokenization - Added new block in cache: ", block)
 	}
 
 	return nil
@@ -160,7 +163,7 @@ func (c *LRUTokenStore) FindLongestContainedTokens(prompt, modelName string) []u
 	c.mu.RUnlock()
 
 	if !ok {
-		fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - err from c.store")
+		fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - key not in cache: c.store ruturns false")
 		return nil
 	}
 

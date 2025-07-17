@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/Luca-Calabria/tokenizers"
 	"github.com/cespare/xxhash/v2"
-	"github.com/daulet/tokenizers"
 	lru "github.com/hashicorp/golang-lru/v2"
 )
 

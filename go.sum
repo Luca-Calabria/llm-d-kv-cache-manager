@@ -1,5 +1,5 @@
-github.com/Luca-Calabria/tokenizers v1.20.7 h1:aUbTqvjsXDTb74jRNPUu3mW6kfY9ONUOC4ByLznFRyw=
-github.com/Luca-Calabria/tokenizers v1.20.7/go.mod h1:sL8FZWayo12F/+z76hEnmVhJeUy042ByHSpRku/1b+8=
+github.com/Luca-Calabria/tokenizers v1.20.9 h1:cJ96L5ldBMGpp20Wq6m4n/qvoIL4WsqW1n5XRfoaMkc=
+github.com/Luca-Calabria/tokenizers v1.20.9/go.mod h1:sL8FZWayo12F/+z76hEnmVhJeUy042ByHSpRku/1b+8=
 github.com/alicebob/gopher-json v0.0.0-20230218143504-906a9b012302 h1:uvdUDbHQHO85qeSydJtItA4T55Pw6BtAejd0APRJOCE=
 github.com/alicebob/gopher-json v0.0.0-20230218143504-906a9b012302/go.mod h1:SGnFV6hVsYE877CKEZ6tDNTjaSXYUk6QqoIK6PrAtcc=
 github.com/alicebob/miniredis/v2 v2.34.0 h1:mBFWMaJSNL9RwdGRyEDoAAv8OQc5UlEhLDQggTglU/0=

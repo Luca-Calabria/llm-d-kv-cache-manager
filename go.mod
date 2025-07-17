@@ -3,7 +3,7 @@ module github.com/Luca-Calabria/llm-d-kv-cache-manager
 go 1.24.1
 
 require (
-	github.com/Luca-Calabria/tokenizers v1.20.7
+	github.com/Luca-Calabria/tokenizers v1.20.9
 	github.com/alicebob/miniredis/v2 v2.34.0
 	github.com/cespare/xxhash/v2 v2.3.0
 	github.com/hashicorp/golang-lru/v2 v2.0.7

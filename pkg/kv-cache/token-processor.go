@@ -121,15 +121,18 @@ func (db *ChunkedTokenDatabase) hash(tokens []uint32, prefixHash string) string 
 // chunkTokens splits the input slice of tokens into chunks of size chunkSize.
 func (db *ChunkedTokenDatabase) chunkTokens(tokens []uint32) [][]uint32 {
 	var chunks [][]uint32
+	fmt.Println("kv-cache:token-processor:chunckTokens - start")
 	for i := 0; i < len(tokens); i += db.ChunkSize {
+		fmt.Println("kv-cache:token-processor:chunckTokens - loop cycle: ", i)
 		end := i + db.ChunkSize
 		if end > len(tokens) {
+			fmt.Println("kv-cache:token-processor:chunckTokens - break partial blocks")
 			break // no partial blocks
 		}
 
 		chunks = append(chunks, tokens[i:end])
 	}
-
+	fmt.Println("kv-cache:token-processor:chunckTokens - end")
 	return chunks
 }
 

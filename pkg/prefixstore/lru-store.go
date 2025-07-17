@@ -113,9 +113,10 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 	tokenIdxIterator := 0
 	previousHash := uint64(0)
 	digest := xxhash.New()
-
+	fmt.Println("Prefixstore:lru-store:AddTokenization - For loop start. promptBytes: ", promptBytes)
 	// Chunk the text into blocks and populate the cache
 	for start := 0; start < len(promptBytes); start += c.blockSize {
+		fmt.Println("Prefixstore:lru-store:AddTokenization - For loop cycle i: ", start)
 		end := start + c.blockSize
 		if end > len(promptBytes) {
 			break // no partial blocks
@@ -152,7 +153,7 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 		cache.Add(blockHash, block)
 		fmt.Println("Prefixstore:lru-store:AddTokenization - Added new block in cache: ", block)
 	}
-
+	fmt.Println("Prefixstore:lru-store:AddTokenization - For loop end.")
 	return nil
 }
 

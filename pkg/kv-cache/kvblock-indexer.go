@@ -119,6 +119,7 @@ func (r *RedisKVBlockIndexer) GetPodsForKeys(ctx context.Context,
 	keys []KVBlockKey, podIdentifierSet sets.Set[string],
 ) ([]string, map[string][]string, error) {
 	if len(keys) == 0 {
+		fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - return len(Keys) == 0")
 		return nil, nil, nil
 	}
 
@@ -133,13 +134,16 @@ func (r *RedisKVBlockIndexer) GetPodsForKeys(ctx context.Context,
 	// queue an HKeys command for each key in the pipeline
 	for i, key := range keys {
 		redisKey := key.String()
+		fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - for loop redisKey: ", redisKey)
 		redisKeys[i] = redisKey
 		// HKeys gets all field names
 		results[i] = pipe.HKeys(ctx, redisKey)
+		fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - for loop results: ", results)
 	}
 
 	_, execErr := pipe.Exec(ctx)
 	if execErr != nil {
+		fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - redis pipeline execution failed: ", execErr)
 		return nil, nil, fmt.Errorf("redis pipeline execution failed: %w", execErr)
 	}
 
@@ -150,8 +154,10 @@ func (r *RedisKVBlockIndexer) GetPodsForKeys(ctx context.Context,
 		// cmd.Result() returns the slice of strings (pod IDs) which is the first layer in the mapping
 		pods, cmdErr := cmd.Result()
 		if cmdErr != nil {
+			fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - Assign empty slice: ")
 			podsPerKey[currentRedisKey] = []string{} // assign an empty slice
 			if !errors.Is(cmdErr, redis.Nil) {
+				fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - failed to get pods for key: ", currentRedisKey)
 				logger.Error(cmdErr, "failed to get pods for key", "key", currentRedisKey)
 			}
 
@@ -159,6 +165,7 @@ func (r *RedisKVBlockIndexer) GetPodsForKeys(ctx context.Context,
 		}
 
 		var filteredPods []string
+		fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - pods: ", pods)
 		for _, p := range pods {
 			ip := strings.SplitN(p, ":", 2)[0]
 			if !filterPods || podIdentifierSet.Has(ip) {
@@ -167,6 +174,7 @@ func (r *RedisKVBlockIndexer) GetPodsForKeys(ctx context.Context,
 		}
 
 		podsPerKey[currentRedisKey] = filteredPods
+		fmt.Println("kvcache:kvblock-indexer:GetPodsForKeys - podsPerKey: ", podsPerKey)
 	}
 
 	return redisKeys, podsPerKey, nil

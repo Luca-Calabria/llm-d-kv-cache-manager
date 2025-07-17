@@ -137,6 +137,6 @@ func (k *Indexer) GetPodScores(ctx context.Context, prompt, modelName string,
 		return nil, fmt.Errorf("failed to query kvblock scorer: %w", err), "Error from kvBlockScorer.Score"
 	}
 	traceLogger.Info("found pod scores", "pod-scores", podScores)
-	return_string := fmt.Sprintf("found tokens: %v, block-keys: %v", tokens, blockKeys)
+	return_string := fmt.Sprintf("found tokens: %v, block-keys: %v, keyToPods: %v", tokens, blockKeys, keyToPods)
 	return podScores, nil, return_string
 }

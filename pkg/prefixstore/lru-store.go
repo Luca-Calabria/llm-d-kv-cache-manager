@@ -159,6 +159,7 @@ func (c *LRUTokenStore) FindLongestContainedTokens(prompt, modelName string) []u
 	c.mu.RUnlock()
 
 	if !ok {
+		fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - err from c.store")
 		return nil
 	}
 

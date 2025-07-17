@@ -84,20 +84,24 @@ func (s *LongestPrefixScorer) Score(blockKeys []string, keyToPods map[string][]s
 	podScores := make(map[string]int)
 
 	if len(blockKeys) == 0 {
+		fmt.Println("kvcache:kvblock-scorer:Score - return len(blockKeys) == 0")
 		return podScores, nil
 	}
 
 	podsForFirstKey := keyToPods[blockKeys[0]]
+	fmt.Println("kvcache:kvblock-scorer:Score - podsForFirstKey: ", podsForFirstKey)
 	activePods := sets.NewString(podsForFirstKey...)
-
+	fmt.Println("kvcache:kvblock-scorer:Score - Active Pods: ", activePods)
 	// set initial score of 1
 	// pods not in the first key will retain the default score of 0.
 	for _, pod := range podsForFirstKey {
 		podScores[pod] = 1
 	}
-
+	fmt.Println("kvcache:kvblock-scorer:Score - podScores: ", podScores)
 	for i := 1; i < len(blockKeys); i++ {
+		fmt.Println("kvcache:kvblock-scorer:Score - for loop cycle: ", i)
 		if activePods.Len() == 0 {
+			fmt.Println("kvcache:kvblock-scorer:Score - for loop break: activePods==0")
 			break
 		}
 
@@ -108,10 +112,12 @@ func (s *LongestPrefixScorer) Score(blockKeys []string, keyToPods map[string][]s
 		activePods = activePods.Intersection(currentPodsSet)
 		for pod := range activePods {
 			// increment score for each pod in the intersection
+			fmt.Println("kvcache:kvblock-scorer:Score - increment Active Pods: ", podScores)
 			podScores[pod]++
 		}
 	}
-
+	fmt.Println("kvcache:kvblock-scorer:Score - for loop end")
+	fmt.Println("kvcache:kvblock-scorer:Score - increment Active Pods: ", podScores)
 	// Return the map containing the final score for each pod encountered.
 	return podScores, nil
 }

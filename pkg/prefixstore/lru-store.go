@@ -119,6 +119,7 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 		fmt.Println("Prefixstore:lru-store:AddTokenization - For loop cycle i: ", start)
 		end := start + c.blockSize
 		if end > len(promptBytes) {
+			fmt.Println("Prefixstore:lru-store:AddTokenization - For loop cycle break end > len(promptBytes)")
 			break // no partial blocks
 		}
 
@@ -146,6 +147,7 @@ func (c *LRUTokenStore) AddTokenization(modelName string, prompt string, tokens 
 			if offsets[tokenIdxIterator][1] <= uint(end) {
 				block.Tokens = append(block.Tokens, tokens[tokenIdxIterator])
 			} else {
+				fmt.Println("Prefixstore:lru-store:AddTokenization - For loop cycle break offsets[tokenIdxIterator][1] <= uint(end)")
 				break
 			}
 		}

@@ -167,7 +167,7 @@ func (c *LRUTokenStore) FindLongestContainedTokens(prompt, modelName string) []u
 	promptBytes := []byte(prompt)
 	previousHash := uint64(0)
 	digest := xxhash.New()
-
+	fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - Start For cycle - promptBytes: ", promptBytes)
 	// Chunk the text into blocks and populate the cache
 	for i := 0; i < len(promptBytes); i += c.blockSize {
 		fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle iter: ", i)
@@ -199,6 +199,6 @@ func (c *LRUTokenStore) FindLongestContainedTokens(prompt, modelName string) []u
 		fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - For cycle block.tokens: ", block.Tokens)
 		containedTokens = append(containedTokens, block.Tokens...)
 	}
-
+	fmt.Println("Prefixstore:lru-store.go:FindLongestContainedTokens - Stop For cycle")
 	return containedTokens
 }

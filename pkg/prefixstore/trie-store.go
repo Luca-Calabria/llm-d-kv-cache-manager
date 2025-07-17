@@ -17,6 +17,7 @@ limitations under the License.
 package prefixstore
 
 import (
+	"fmt"
 	"sync"
 
 	"github.com/Luca-Calabria/tokenizers"
@@ -71,6 +72,7 @@ func (s *ContainedTokenStore) FindLongestContainedTokens(prompt, modelName strin
 	s.mu.RUnlock()
 
 	if !ok {
+		fmt.Println("Prefixstore:trie-store.go:FindLongestContainedTokens - not Trie")
 		return nil
 	}
 

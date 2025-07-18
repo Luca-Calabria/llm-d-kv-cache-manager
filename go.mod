@@ -5,7 +5,7 @@ go 1.24.1
 require (
 	github.com/alicebob/miniredis/v2 v2.34.0
 	github.com/cespare/xxhash/v2 v2.3.0
-	github.com/daulet/tokenizers v1.21.1-0.20250715235457-d6cd62ac24c7
+	github.com/daulet/tokenizers v1.22.0
 	github.com/hashicorp/golang-lru/v2 v2.0.7
 	github.com/llm-d/llm-d-kv-cache-manager v0.1.1
 	github.com/redis/go-redis/v9 v9.7.3

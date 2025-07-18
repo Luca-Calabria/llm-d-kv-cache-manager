@@ -20,12 +20,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/llm-d/llm-d-kv-cache-manager/pkg/prefixstore"
+	"github.com/Luca-Calabria/llm-d-kv-cache-manager/pkg/prefixstore"
 	"k8s.io/apimachinery/pkg/util/sets"
 
 	"k8s.io/klog/v2"
 
-	"github.com/llm-d/llm-d-kv-cache-manager/pkg/tokenization"
+	"github.com/Luca-Calabria/llm-d-kv-cache-manager/pkg/tokenization"
 )
 
 // Config holds the configuration for the Indexer module.

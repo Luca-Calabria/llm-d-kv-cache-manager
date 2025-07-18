@@ -1,12 +1,13 @@
-module github.com/llm-d/llm-d-kv-cache-manager
+module github.com/Luca-Calabria/llm-d-kv-cache-manager
 
 go 1.24.1
 
 require (
 	github.com/alicebob/miniredis/v2 v2.34.0
 	github.com/cespare/xxhash/v2 v2.3.0
-	github.com/daulet/tokenizers v1.20.2
+	github.com/daulet/tokenizers v1.22.1
 	github.com/hashicorp/golang-lru/v2 v2.0.7
+	github.com/llm-d/llm-d-kv-cache-manager v0.1.1
 	github.com/redis/go-redis/v9 v9.7.3
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/net v0.39.0

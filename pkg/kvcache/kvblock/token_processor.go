@@ -24,7 +24,7 @@ import (
 	"github.com/fxamacker/cbor/v2"
 	"k8s.io/klog/v2"
 
-	"github.com/llm-d/llm-d-kv-cache-manager/pkg/utils"
+	"github.com/Luca-Calabria/llm-d-kv-cache-manager/pkg/utils"
 )
 
 // defaultBlockSize is the default number of tokens per block.

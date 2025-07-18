@@ -23,7 +23,7 @@ import (
 
 	lru "github.com/hashicorp/golang-lru/v2"
 
-	"github.com/daulet/tokenizers"
+	"github.com/Luca-Calabria/tokenizers"
 )
 
 // tokenizersCacheSize is the size of the LRU cache for tokenizers.

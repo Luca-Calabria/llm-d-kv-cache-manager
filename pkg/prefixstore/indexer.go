@@ -17,7 +17,7 @@ limitations under the License.
 package prefixstore
 
 import (
-	"github.com/daulet/tokenizers"
+	"github.com/Luca-Calabria/tokenizers"
 )
 
 // Config holds the configuration for the Indexer module.

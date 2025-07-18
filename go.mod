@@ -3,9 +3,9 @@ module github.com/Luca-Calabria/llm-d-kv-cache-manager
 go 1.24.1
 
 require (
+	github.com/Luca-Calabria/tokenizers v1.20.9
 	github.com/alicebob/miniredis/v2 v2.34.0
 	github.com/cespare/xxhash/v2 v2.3.0
-	github.com/daulet/tokenizers v1.21.0
 	github.com/hashicorp/golang-lru/v2 v2.0.7
 	github.com/llm-d/llm-d-kv-cache-manager v0.1.1
 	github.com/redis/go-redis/v9 v9.7.3
@@ -18,6 +18,7 @@ require (
 
 require (
 	github.com/alicebob/gopher-json v0.0.0-20230218143504-906a9b012302 // indirect
+	github.com/daulet/tokenizers v1.20.2 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/go-logr/logr v1.4.2 // indirect

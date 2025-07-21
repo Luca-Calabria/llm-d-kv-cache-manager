@@ -21,7 +21,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/daulet/tokenizers"
+	"github.com/Luca-Calabria/tokenizers"
 	lru "github.com/hashicorp/golang-lru/v2"
 )
 

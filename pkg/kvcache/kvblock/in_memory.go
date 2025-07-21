@@ -24,8 +24,8 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/klog/v2"
 
-	"github.com/llm-d/llm-d-kv-cache-manager/pkg/utils"
-	"github.com/llm-d/llm-d-kv-cache-manager/pkg/utils/logging"
+	"github.com/Luca-Calabria/llm-d-kv-cache-manager/pkg/utils"
+	"github.com/Luca-Calabria/llm-d-kv-cache-manager/pkg/utils/logging"
 )
 
 const (

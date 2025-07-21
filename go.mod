@@ -1,10 +1,10 @@
-module github.com/llm-d/llm-d-kv-cache-manager
+module github.com/Luca-Calabria/llm-d-kv-cache-manager
 
 go 1.24.1
 
 require (
+	github.com/Luca-Calabria/tokenizers v1.20.9
 	github.com/cespare/xxhash/v2 v2.3.0
-	github.com/daulet/tokenizers v1.20.2
 	github.com/fxamacker/cbor/v2 v2.7.0
 	github.com/hashicorp/golang-lru/v2 v2.0.7
 	github.com/pebbe/zmq4 v1.4.0
@@ -21,6 +21,7 @@ require (
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/daulet/tokenizers v1.22.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/emicklei/go-restful/v3 v3.11.0 // indirect

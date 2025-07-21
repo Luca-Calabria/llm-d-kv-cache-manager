@@ -19,7 +19,7 @@ package prefixstore //nolint:testpackage // convenience
 import (
 	"testing"
 
-	"github.com/daulet/tokenizers"
+	"github.com/Luca-Calabria/tokenizers"
 	"github.com/stretchr/testify/assert"
 )
 

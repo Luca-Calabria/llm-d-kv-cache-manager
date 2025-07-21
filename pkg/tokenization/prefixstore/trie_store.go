@@ -19,7 +19,7 @@ package prefixstore
 import (
 	"sync"
 
-	"github.com/daulet/tokenizers"
+	"github.com/Luca-Calabria/tokenizers"
 )
 
 // ContainedTokenStore manages a collection of containedTokenTrie,
